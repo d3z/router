@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 (function() {
 
   'use strict';
@@ -10,6 +11,7 @@
 
   var server = http.createServer(function(request, response){
     var host = request.headers.host;
+    var url = request.url;
     var target = config.routing_table[host];
     if (!target) {
       response.writeHead(400, {'Content-Type':'text/plain'});
@@ -19,11 +21,12 @@
       if (!isNaN(target)) {
         target = config.default_host + ':' + target;
       }
+      console.log('    Forwarding ' + host + url + ' -> ' + target); 
       proxy.web(request, response, {target: target});
     }
   });
 
-  server.listen(80);
-  console.log('router is running on 127.0.0.1:80');
+  server.listen(config.port);
+  console.log('router is running on 127.0.0.1:' + config.port);
 
 })();
