@@ -17,14 +17,16 @@ The `config` object has the following settings:
 * `routing_table` is a map of requests to targets. A target can be a full hostname or simply a port number.
 
 For example:
-    {
-        "port": 80,
-        "default_host": "http://localhost",
-        "routing_table": {
-            "example.com": "http://another-example.com",
-            "foo.com": 8080  
-        }
+```
+{
+    "port": 80,
+    "default_host": "http://localhost",
+    "routing_table": {
+        "example.com": "http://another-example.com",
+        "foo.com": 8080  
     }
+}
+```
 
 In the example above, router will accept requests on port 80. Any requests to 'example.com' will be forwarded to 'another-example.com'.
 Any requests to 'foo.com' will be forwarded to 'localhost:8080'.
